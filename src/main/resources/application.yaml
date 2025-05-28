@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://nechks:nechks@cluster0.9taug.mongodb.net/projeto
+    redis:
+      host: localhost
+      port: 6379
+  cache:
+      type: redis
