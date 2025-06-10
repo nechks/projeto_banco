@@ -1,7 +1,7 @@
 
 package com.example.projeto_banco.estrutura.controller;
 
-import com.example.projeto_banco.estrutura.entidade.TurmaEntidy;
+import com.example.projeto_banco.estrutura.model.TurmaEntidy;
 import com.example.projeto_banco.estrutura.repository.TurmaReposity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

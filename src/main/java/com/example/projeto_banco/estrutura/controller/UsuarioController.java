@@ -1,7 +1,7 @@
 
 package com.example.projeto_banco.estrutura.controller;
 
-import com.example.projeto_banco.estrutura.entidade.UsuarioEntidy;
+import com.example.projeto_banco.estrutura.model.UsuarioEntidy;
 import com.example.projeto_banco.estrutura.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

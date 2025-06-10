@@ -1,6 +1,6 @@
 package com.example.projeto_banco.estrutura.controller;
 
-import com.example.projeto_banco.estrutura.entidade.PeriodoEntidy;
+import com.example.projeto_banco.estrutura.model.PeriodoEntidy;
 import com.example.projeto_banco.estrutura.repository.PeriodoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

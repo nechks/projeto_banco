@@ -2,7 +2,7 @@ package com.example.projeto_banco.estrutura.controller;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import com.example.projeto_banco.estrutura.entidade.UsuarioEntidy;
+import com.example.projeto_banco.estrutura.model.UsuarioEntidy;
 import com.example.projeto_banco.estrutura.repository.UsuarioRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
