@@ -11,48 +11,48 @@ import com.example.projeto_banco.estrutura.model.PeriodoEntidy;
 import com.example.projeto_banco.estrutura.repository.PeriodoRepository;
 
 public class PeriodoServices {
- @Autowired
- private PeriodoRepository periodoRepository;
 
- @Cacheable(value = "periodo", key = "#id")
- public Optional<PeriodoEntidy> buscarPeriodoPorId(String id) {
-  System.out.println("Buscando no MongoDB...");
-  return periodoRepository.findById(id);
- }
-
- public void adicionarPeriodo() {
   Scanner scanner = new Scanner(System.in);
+  @Autowired
+  private PeriodoRepository periodoRepository;
 
-  System.out.println("Digite do numero do periodo");
-  String namePeriodo = scanner.nextLine();
+  @Cacheable(value = "periodo", key = "#id")
+  public Optional<PeriodoEntidy> buscarPeriodoPorId(String id) {
+    System.out.println("Buscando no MongoDB...");
+    return periodoRepository.findById(id);
+  }
 
-  PeriodoEntidy pEntidy = PeriodoEntidy.builder()
-    .periodo(namePeriodo).build();
+  public void adicionarPeriodo() {
 
-  periodoRepository.save(pEntidy);
-  scanner.close();
+    System.out.println("Digite do numero do periodo");
+    String namePeriodo = scanner.nextLine();
 
- }
+    PeriodoEntidy pEntidy = PeriodoEntidy.builder()
+        .periodo(namePeriodo).build();
 
- public PeriodoEntidy buscarPorId(String id) {
-  return periodoRepository.findById(id).orElse(null);
- }
+    periodoRepository.save(pEntidy);
 
- public List<PeriodoEntidy> listarTodos() {
-  return periodoRepository.findAll();
- }
+  }
 
- public PeriodoEntidy atualizar(String id, PeriodoEntidy dadosAtulizadados) {
-  PeriodoEntidy periodo = periodoRepository.findById(id)
-    .orElseThrow(() -> new RuntimeException("periodo nao encontrado"));
+  public PeriodoEntidy buscarPorId(String id) {
+    return periodoRepository.findById(id).orElse(null);
+  }
 
-  periodo.setPeriodo(dadosAtulizadados.getPeriodo());
-  periodo.setId(dadosAtulizadados.getPeriodo());
+  public List<PeriodoEntidy> listarTodos() {
+    return periodoRepository.findAll();
+  }
 
-  return periodoRepository.save(periodo);
- }
+  public PeriodoEntidy atualizar(String id, PeriodoEntidy dadosAtulizadados) {
+    PeriodoEntidy periodo = periodoRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("periodo nao encontrado"));
 
- public void deletar(String id) {
-  periodoRepository.deleteById(id);
- }
+    periodo.setPeriodo(dadosAtulizadados.getPeriodo());
+    periodo.setId(dadosAtulizadados.getPeriodo());
+
+    return periodoRepository.save(periodo);
+  }
+
+  public void deletar(String id) {
+    periodoRepository.deleteById(id);
+  }
 }

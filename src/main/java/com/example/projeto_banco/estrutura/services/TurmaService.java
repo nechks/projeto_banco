@@ -11,49 +11,49 @@ import com.example.projeto_banco.estrutura.model.TurmaEntidy;
 import com.example.projeto_banco.estrutura.repository.TurmaReposity;
 
 public class TurmaService {
- @Autowired
- private TurmaReposity turmaRepository;
 
- @Cacheable(value = "turma", key = "#id")
- public Optional<TurmaEntidy> buscarTurmaPorId(String id) {
-  System.out.println("Buscando no MongoDB...");
-  return turmaRepository.findById(id);
- }
-
- public void adicionarTurma() {
   Scanner scanner = new Scanner(System.in);
+  @Autowired
+  private TurmaReposity turmaRepository;
 
-  System.out.println("Digite a turma");
-  String nameTurma = scanner.nextLine();
+  @Cacheable(value = "turma", key = "#id")
+  public Optional<TurmaEntidy> buscarTurmaPorId(String id) {
+    System.out.println("Buscando no MongoDB...");
+    return turmaRepository.findById(id);
+  }
 
-  TurmaEntidy tEntidy = TurmaEntidy.builder()
-    .turma(nameTurma).build();
+  public void adicionarTurma() {
 
-  turmaRepository.save(tEntidy);
-  scanner.close();
+    System.out.println("Digite a turma");
+    String nameTurma = scanner.nextLine();
 
- }
+    TurmaEntidy tEntidy = TurmaEntidy.builder()
+        .turma(nameTurma).build();
 
- public TurmaEntidy buscarPorId(String id) {
-  return turmaRepository.findById(id).orElse(null);
- }
+    turmaRepository.save(tEntidy);
 
- public List<TurmaEntidy> listarTodos() {
-  return turmaRepository.findAll();
- }
+  }
 
- public TurmaEntidy atualizar(String id, TurmaEntidy dadosAtulizadados) {
-  TurmaEntidy turma = turmaRepository.findById(id)
-    .orElseThrow(() -> new RuntimeException("turma nao encontrado"));
+  public TurmaEntidy buscarPorId(String id) {
+    return turmaRepository.findById(id).orElse(null);
+  }
 
-  turma.setTurma(dadosAtulizadados.getTurma());
-  turma.setId(dadosAtulizadados.getId());
+  public List<TurmaEntidy> listarTodos() {
+    return turmaRepository.findAll();
+  }
 
-  return turmaRepository.save(turma);
- }
+  public TurmaEntidy atualizar(String id, TurmaEntidy dadosAtulizadados) {
+    TurmaEntidy turma = turmaRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("turma nao encontrado"));
 
- public void deletar(String id) {
-  turmaRepository.deleteById(id);
- }
+    turma.setTurma(dadosAtulizadados.getTurma());
+    turma.setId(dadosAtulizadados.getId());
+
+    return turmaRepository.save(turma);
+  }
+
+  public void deletar(String id) {
+    turmaRepository.deleteById(id);
+  }
 
 }

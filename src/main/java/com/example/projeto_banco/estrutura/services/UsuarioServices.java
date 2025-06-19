@@ -7,66 +7,64 @@ import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
 import com.example.projeto_banco.estrutura.model.UsuarioEntidy;
 import com.example.projeto_banco.estrutura.repository.UsuarioRepository;
 
 @Service
 public class UsuarioServices {
-@Autowired
- private UsuarioRepository usuarioRepository;
-
- @Cacheable(value = "usuario", key = "#id")
- public Optional<UsuarioEntidy> buscarCursoPorId(String id) {
-  System.out.println("Buscando no MongoDB...");
-  return usuarioRepository.findById(id);
- }
-
- public void adicionarCurso(){
   Scanner scanner = new Scanner(System.in);
+  @Autowired
+  private UsuarioRepository usuarioRepository;
 
-  System.out.println("Digite o nome do usuario ");
-  String nameUsuario = scanner.nextLine();
-  System.out.println("RA de usuario ");
-  String raUsuario = scanner.nextLine();
-  System.out.println("turma ");
-  String turma = scanner.nextLine();
+  @Cacheable(value = "usuario", key = "#id")
+  public Optional<UsuarioEntidy> buscarUsuarioPorId(String id) {
+    System.out.println("Buscando no MongoDB...");
+    return usuarioRepository.findById(id);
+  }
 
+  public void adicionarUsuario() {
 
+    System.out.println("Digite o nome do usuário: ");
+    String nomeUsuario = scanner.nextLine();
 
-   UsuarioEntidy uEntidy = UsuarioEntidy.builder()
-  .usuario(nameUsuario)
-  .usuario(raUsuario)
-  .usuario(turma)
-  .build();
+    System.out.println("RA do usuário: ");
+    String raUsuario = scanner.nextLine();
 
-  usuarioRepository.save(uEntidy);
-  scanner.close();
+    System.out.println("Turma do usuário: ");
+    String turma = scanner.nextLine();
 
-  
- }
+    UsuarioEntidy uEntidy = UsuarioEntidy.builder()
+        .usuario(nomeUsuario)
+        .ra(raUsuario)
+        .turma(turma)
+        .build();
 
- public UsuarioEntidy buscarPorId(String id) {
-  return usuarioRepository.findById(id).orElse(null);
- }
+    usuarioRepository.save(uEntidy);
 
- public List <UsuarioEntidy> listarTodos(){
-  return usuarioRepository.findAll();
- }
+    // NÃO fechar o scanner aqui para evitar problemas com System.in
+  }
 
- public UsuarioEntidy atualizar(String id, UsuarioEntidy dadosAtulizadados){
-  UsuarioEntidy usuario = usuarioRepository.findById(id)
-   .orElseThrow(() -> new RuntimeException("Usuario nao encontrado"));
+  public UsuarioEntidy buscarPorId(String id) {
+    return usuarioRepository.findById(id).orElse(null);
+  }
 
-   usuario.setUsuario(dadosAtulizadados.getUsuario());
-   usuario.setId(dadosAtulizadados.getId());
+  public List<UsuarioEntidy> listarTodos() {
+    return usuarioRepository.findAll();
+  }
 
-   return usuarioRepository.save(usuario);
- }
+  public UsuarioEntidy atualizar(String id, UsuarioEntidy dadosAtualizados) {
+    UsuarioEntidy usuario = usuarioRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
+    usuario.setUsuario(dadosAtualizados.getUsuario());
+    usuario.setRa(dadosAtualizados.getRa());
+    usuario.setTurma(dadosAtualizados.getTurma());
 
- public void deletar(String id){
-  usuarioRepository.deleteById(id);
- }
+    return usuarioRepository.save(usuario);
+  }
 
-
+  public void deletar(String id) {
+    usuarioRepository.deleteById(id);
+  }
 }
